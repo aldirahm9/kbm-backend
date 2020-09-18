@@ -11,18 +11,19 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $dosen = App\Dosen::create([
+        $dosen = App\User::create([
             'nama' => 'eka',
             'email' => 'eka@unj.com',
-            'password' => '123123',
-            'nidn' => '123'
+            'password' => bcrypt('123123'),
+            'nomor_induk' => '123',
+            'dosen' => 1
         ]);
 
-        $mahasiswa = App\Mahasiswa::create([
+        $mahasiswa = App\User::create([
             'nama' => 'aldi',
             'email' => 'aldi@unj.com',
-            'password' => '123123',
-            'nrm' => '123'
+            'password' => bcrypt('123123'),
+            'nomor_induk' => '1223'
         ]);
 
         $matakuliah = App\MataKuliah::create([

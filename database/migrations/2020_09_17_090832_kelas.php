@@ -17,8 +17,6 @@ class Kelas extends Migration
             $table->id();
             $table->unsignedBigInteger('mata_kuliah_id');
             $table->foreign('mata_kuliah_id')->references('id')->on('mata_kuliah')->onDelete('cascade');
-            $table->unsignedBigInteger('dosen_id');
-            $table->foreign('dosen_id')->references('id')->on('dosen')->onDelete('cascade');
             $table->timestamps();
         });
     }

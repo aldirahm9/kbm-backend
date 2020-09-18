@@ -17,8 +17,8 @@ class Absen extends Migration
             $table->id();
             $table->unsignedBigInteger('pertemuan_id');
             $table->foreign('pertemuan_id')->references('id')->on('pertemuan')->onDelete('cascade');
-            $table->unsignedBigInteger('mahasiswa_id');
-            $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
