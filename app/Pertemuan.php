@@ -10,12 +10,17 @@ class Pertemuan extends Model
     protected $table = 'pertemuan';
 
     protected $fillable = [
-        'pertemuan', 'materi', 'validDosen', 'validMahasiswa'
+        'id','pertemuan', 'materi', 'valid_dosen', 'valid_mahasiswa','kelas_id','open'
     ];
 
-    public function kelas()
+    public function valid_dosen()
     {
-        return $this->belongsTo('App\Kelas');
+        $this->valid_dosen = 1;
+    }
+
+    public function valid_mahasiswa()
+    {
+        $this->valid_mahasiswa = 1;
     }
 
     public function tugas()
@@ -25,9 +30,10 @@ class Pertemuan extends Model
 
     public function mahasiswa()
     {
-        return $this->belongsToMany('App\Mahasiswa')
-                    ->as('absen')
+        return $this->belongsToMany('App\User','absen')
+                    ->using('App\Absen')
                     ->withPivot(['valid'])
                     ->withTimestamps();
     }
+
 }

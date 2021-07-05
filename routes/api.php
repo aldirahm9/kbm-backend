@@ -20,21 +20,31 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+
+
 Route::group(['middleware' => 'api','prefix'=> 'auth'], function () {
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
+    Route::get('me', 'AuthController@me');
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::post('kelas', 'HomeController@getAllKelas');
-    Route::post('kelas/{id}', 'KelasController@getKelas');
-    Route::post('kelas/{id}/form-05', 'KelasController@getForm05');
-    Route::post('kelas/{id}/form-05/add', 'KelasController@buatPertemuan');
-    Route::post('form-05/{id}/valid', 'KelasController@validPertemuan');
-    Route::post('form-05/{id}/buka-absen', 'KelasController@bukaAbsen');
-    Route::post('kelas/{id}/form-06', 'KelasController@getForm06');
-    Route::post('kelas/{id}/form-06-nilai', 'KelasController@getForm06Nilai');
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('kelas', 'KelasController@getAllKelas');
+    Route::get('kelas/{id}', 'KelasController@getKelas');
+    Route::get('kelas/{id}/form-05', 'PertemuanController@getForm05');
+    Route::post('kelas/{id}/form-05/add', 'PertemuanController@buatPertemuan');
+    Route::post('form-05/{id}/valid', 'pertemuanController@validPertemuan');
+    Route::post('form-05/{id}/hadir', 'pertemuanController@hadirPertemuan');
+    Route::post('form-05/{id}/buka-absen', 'PertemuanController@bukaAbsen');
+
+    Route::post('absen/{id}/valid', 'PertemuanController@validPresensi');
+
+    Route::get('kelas/{id}/form-06', 'PertemuanController@getForm06');
+    Route::post('kelas/{id}/form-06-nilai', 'NilaiController@getForm06Nilai');
+
+    Route::get('kelas/{id}/tugas', 'NilaiController@getTugas');
+
 });
+
 

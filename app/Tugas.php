@@ -10,19 +10,14 @@ class Tugas extends Model
     protected $table = 'tugas';
 
     protected $fillable = [
-        'nama', 'tipe'
+        'nama', 'tipe', 'bobot'
     ];
 
     public function mahasiswa()
     {
-        return $this->belongsToMany('App\Mahasiswa')
-                    ->as('nilai')
+        return $this->belongsToMany('App\User','nilai')
                     ->withPivot('nilai')
                     ->withTimestamps();
     }
 
-    public function pertemuan()
-    {
-        return $this->belongsTo('App\Pertemuan');
-    }
 }

@@ -19,7 +19,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'nomor_induk','dosen'
+        'username', 'nama', 'dosen', 'password', 'token_siakad'
     ];
 
     /**
@@ -67,17 +67,21 @@ class User extends Authenticatable implements JWTSubject
 
     public function pertemuan()
     {
-        return $this->belongsToMany('App\Pertemuan')
-                    ->as('absen')
+        return $this->belongsToMany('App\Pertemuan','absen')
+                    ->using('App\Absen')
                     ->withPivot('valid')
                     ->withTimestamps();
     }
 
     public function tugas()
     {
-        return $this->belongsToMany('App\Tugas')
-                    ->as('nilai')
+        return $this->belongsToMany('App\Tugas','nilai')
                     ->withPivot('nilai')
                     ->withTimestamps();
+    }
+
+    public function isDosen()
+    {
+        return $this->dosen == 1;
     }
 }

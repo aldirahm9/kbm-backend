@@ -19,6 +19,7 @@ class Absen extends Migration
             $table->foreign('pertemuan_id')->references('id')->on('pertemuan')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->boolean('valid')->default(0);
             $table->timestamps();
         });
     }

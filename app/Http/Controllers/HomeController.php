@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\ApiUtils\SiakadUtils;
+use App\Http\Resources\KelasResourceCollection;
+use App\Kelas;
 use Illuminate\Http\Request;
+use Config;
 
 class HomeController extends Controller
 {
@@ -25,4 +29,8 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+
+
+
 }

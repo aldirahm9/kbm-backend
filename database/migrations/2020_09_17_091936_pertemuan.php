@@ -16,11 +16,13 @@ class Pertemuan extends Migration
         Schema::create('pertemuan', function (Blueprint $table) {
             $table->id();
             $table->integer('pertemuan');
-            $table->unsignedBigInteger('kelas_id');
-            $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
+            $table->string('kelas_id');
+
             $table->string('materi');
             $table->tinyInteger('valid_dosen');
             $table->tinyInteger('valid_mahasiswa');
+            $table->tinyInteger('open')->default(0);
+            $table->integer('jumlah_mahasiswa')->default(0);
             $table->timestamps();
         });
     }

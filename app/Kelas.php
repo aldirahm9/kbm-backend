@@ -4,31 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Kelas extends Model
+
+class Kelas extends Model //Merupakan class pivot antara mahasiswa dan kelas(siakad)
 {
+
+    protected $table = 'kelas_mahasiswa';
+
     protected $fillable = [
-        'kodeSeksi','jadwal'
+        'kelas_id', 'user_id', 'nilai', 'penanggung_jawab'
     ];
 
-    protected $table = 'kelas';
-
-    public function mataKuliah()
-    {
-        return $this->belongsTo('App\Matakuliah');
+    public function mahasiswa() {
+        return $this->belongsTo('App\User');
     }
 
-    public function dosen()
-    {
-        return $this->belongsToMany('App\Dosen');
-    }
-
-    public function mahasiswa()
-    {
-        return $this->hasMany('App\Mahasiswa');
-    }
-
-    public function pertemuan()
-    {
-        return $this->hasMany('App\Pertemuan');
-    }
 }

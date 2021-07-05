@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0bf466308e114df51c8e3b22bafe9b5",
+    "content-hash": "726b840c7d670bd628204df3070ce31f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -109,6 +109,59 @@
                 }
             ],
             "time": "2020-08-18T23:57:15+00:00"
+        },
+        {
+            "name": "cristal/php-api-wrapper",
+            "version": "v5.1.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CristalTeam/php-api-wrapper.git",
+                "reference": "d0afb958f17c4b91109633ec4c432ff6dab07537"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CristalTeam/php-api-wrapper/zipball/d0afb958f17c4b91109633ec4c432ff6dab07537",
+                "reference": "d0afb958f17c4b91109633ec4c432ff6dab07537",
+                "shasum": ""
+            },
+            "require": {
+                "php-curl-class/php-curl-class": "^8.3",
+                "psr/cache": "^1.0.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4",
+                "phpunit/phpunit": "^9.3",
+                "symfony/var-dumper": "^5.1"
+            },
+            "suggest": {
+                "api-platform/core": "To integrate a DataProvider and support the Paginator of the Api Platform in addition to the support of Symfony.",
+                "barryvdh/laravel-debugbar": "To support request tracking in your Laravel app.",
+                "laravel/framework": "To integrate Laravel Collection, Pagination and Eloquent relations with your models.",
+                "league/oauth2-client": "To support OAuth2 request Transport.",
+                "symfony/symfony": "To integrate a ManagerRegistry, a Paginator and support serialization with your entities."
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "Cristal\\ApiWrapper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cristal",
+                    "email": "cristal@cpro.fr"
+                }
+            ],
+            "description": "Work with APIs like with Laravel Eloquent or Doctrine (no longer a dream)",
+            "support": {
+                "issues": "https://github.com/CristalTeam/php-api-wrapper/issues",
+                "source": "https://github.com/CristalTeam/php-api-wrapper/tree/v5.1.11"
+            },
+            "time": "2020-10-29T13:28:36+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1733,6 +1786,77 @@
             "time": "2018-07-02T15:55:56+00:00"
         },
         {
+            "name": "php-curl-class/php-curl-class",
+            "version": "8.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-curl-class/php-curl-class.git",
+                "reference": "c97c96d5d422b4085aba32ace096c3e404dde607"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/c97c96d5d422b4085aba32ace096c3e404dde607",
+                "reference": "c97c96d5d422b4085aba32ace096c3e404dde607",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "ext-gd": "*",
+                "phpunit/phpunit": "*",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "suggest": {
+                "ext-mbstring": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Curl\\": "src/Curl/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Unlicense"
+            ],
+            "authors": [
+                {
+                    "name": "Zach Borboa"
+                }
+            ],
+            "description": "PHP Curl Class makes it easy to send HTTP requests and integrate with web APIs.",
+            "homepage": "https://github.com/php-curl-class/php-curl-class",
+            "keywords": [
+                "API-Client",
+                "api",
+                "class",
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http-client",
+                "http-proxy",
+                "json",
+                "php",
+                "php-curl",
+                "php-curl-library",
+                "proxy",
+                "requests",
+                "restful",
+                "web-scraper",
+                "web-scraping ",
+                "web-service",
+                "xml"
+            ],
+            "support": {
+                "issues": "https://github.com/php-curl-class/php-curl-class/issues",
+                "source": "https://github.com/php-curl-class/php-curl-class/tree/8.10.0"
+            },
+            "time": "2021-06-23T14:34:00+00:00"
+        },
+        {
             "name": "phpoption/phpoption",
             "version": "1.7.5",
             "source": {
@@ -1796,6 +1920,55 @@
                 }
             ],
             "time": "2020-07-20T17:29:33+00:00"
+        },
+        {
+            "name": "psr/cache",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/cache.git",
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Cache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for caching libraries",
+            "keywords": [
+                "cache",
+                "psr",
+                "psr-6"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/cache/tree/master"
+            },
+            "time": "2016-08-06T20:24:11+00:00"
         },
         {
             "name": "psr/container",
@@ -7043,5 +7216,5 @@
         "php": "^7.2.5"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }

@@ -13,13 +13,16 @@ class KelasUser extends Migration
      */
     public function up()
     {
-        Schema::create('kelas_user', function (Blueprint $table) {
+        Schema::create('kelas_mahasiswa', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('kelas_id');
-            $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
+
+            $table->string('kelas_id');
+
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('nilai');
+
+            $table->integer('nilai')->nullable();
+            $table->boolean('penanggung_jawab')->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ class KelasUser extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kelas_user');
+        Schema::dropIfExists('kelas_mahasiswa');
     }
 }

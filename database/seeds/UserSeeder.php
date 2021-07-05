@@ -1,5 +1,6 @@
 <?php
 
+use App\Kelas;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -12,8 +13,8 @@ class UserSeeder extends Seeder
     public function run()
     {
         $dosen = App\User::create([
-            'nama' => 'eka',
-            'email' => 'eka@unj.com',
+            'nama' => 'dosen',
+            'email' => 'dosen@unj.com',
             'password' => bcrypt('123123'),
             'nomor_induk' => '123',
             'dosen' => 1
@@ -23,13 +24,34 @@ class UserSeeder extends Seeder
             'nama' => 'aldi',
             'email' => 'aldi@unj.com',
             'password' => bcrypt('123123'),
-            'nomor_induk' => '1223'
+            'nomor_induk' => '3145161324'
         ]);
 
-        $matakuliah = App\MataKuliah::create([
-            'nama' => 'PKB',
+        App\User::create([
+            'nama' => 'mahasiswa',
+            'email' => 'mahasiswa@unj.com',
+            'password' => bcrypt('123123'),
+            'nomor_induk' => '125223'
+        ]);
+
+        $mata_kuliah = App\MataKuliah::create([
+            'nama' => 'Pengantar Kecerdasan Buatan',
             'sks' => 3,
             'kode' => '123456'
         ]);
+
+        App\MataKuliah::create([
+            'nama' => 'OSK',
+            'sks' => 3,
+            'kode' => '1234562'
+        ]);
+
+        $kelas = Kelas::create([
+            'mata_kuliah_id' => $mata_kuliah->id
+        ]);
+
+        $mahasiswa->kelas()->attach($kelas->id);
+        $dosen->kelas()->attach($kelas->id);
+
     }
 }
