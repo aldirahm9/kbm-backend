@@ -7,6 +7,7 @@ use App\Exports\NilaiExport;
 use App\Http\Resources\NilaiResourceCollection;
 use App\Http\Resources\TugasResource;
 use App\Http\Resources\TugasResourceCollection;
+use App\Imports\NilaiImport;
 use App\Kelas;
 use App\Tugas;
 use App\User;
@@ -56,10 +57,15 @@ class TugasController extends Controller
         return response()->json(['Message' => 'Success'],200);
     }
 
-    public function excel($id)
+    public function exportExcel($id)
     {
         $resp = SiakadUtils::getKelasMahasiswaBySemester(auth()->user()->username,config('semester.semesterAktif'),auth()->user()->token_siakad);
         $found = collect($resp->isi)->where('idkrs',$id)->first();
         return Excel::download((new NilaiExport($id)),'Nilai_' . $found->namaMK . '.xlsx');
+    }
+
+    public function importExcel($id,Request $request)
+    {
+        Excel::import(new NilaiImport($id), $request->file);
     }
 }

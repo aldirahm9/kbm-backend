@@ -32,7 +32,7 @@ class NilaiResourceCollection extends ResourceCollection
     {
         return [
             'meta' => [
-                'tugas_id' => Tugas::where('kelas_id',$this->kelas)->pluck('id')
+                'tugas_id' => Tugas::where('kelas_id',$this->kelas)->where('tipe',0)->pluck('id')
             ]
         ];
     }

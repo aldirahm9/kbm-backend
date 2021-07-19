@@ -25,7 +25,7 @@ class NilaiExport extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder imple
     {
         $usersid = Kelas::where('kelas_id',$this->kelas_id)->get()->pluck('user_id');
         $users = User::find($usersid);
-        $tugas = Tugas::where('kelas_id',$this->kelas_id)->get();
+        $tugas = Tugas::where('kelas_id',$this->kelas_id)->where('tipe',0)->get();
         return view('exports.nilai', [
             'kelas_id' => $this->kelas_id,
             'users' => $users,
@@ -37,7 +37,7 @@ class NilaiExport extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder imple
     {
         $alpha = range('C','Z');
         $arr = [];
-        $tugas = Tugas::where('kelas_id',$this->kelas_id)->count()+2;
+        $tugas = Tugas::where('kelas_id',$this->kelas_id)->where('tipe',0)->count()+2;
         for($i=0;$i<$tugas;$i++) {
             $arr[$alpha[$i]] = 5;
         }

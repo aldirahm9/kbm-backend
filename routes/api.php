@@ -56,7 +56,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::put('tugas/{id}', 'TugasController@ubahTugas');
 
 
-    Route::get('kelas/{id}/nilai/excel', 'TugasController@excel');
+    Route::get('kelas/{id}/nilai/excel', 'TugasController@exportExcel');
+    Route::post('kelas/{id}/nilai/excel', 'TugasController@importExcel');
 
 });
 
