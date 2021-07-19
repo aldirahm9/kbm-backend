@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Log;
 class NilaiResource extends JsonResource
 {
     protected $kelas;
-    function __construct(User $model)
-    {
-        parent::__construct($model);
-    }
+    // function __construct(User $model)
+    // {
+    //     parent::__construct($model);
+    // }
 
     public function kelas($value){
         $this->kelas = $value;
@@ -33,11 +33,11 @@ class NilaiResource extends JsonResource
         return [
             'mahasiswa_id' => $this->id,
             'nama' => $this->nama,
-            'nomor_induk' => $this->nomor_induk,
+            'nomor_induk' => $this->username,
             'tugas' =>
-            $this->tugas()->whereIn('tugas_id',$tugas)->where('tipe',0)->get(['pertemuan_id','nilai','tugas_id'])->makeHidden('pivot'),
-            'UTS' => $this->tugas()->whereIn('tugas_id',$tugas)->where('tipe',1)->get(['pertemuan_id','nilai','tugas_id'])->makeHidden('pivot')->first(),
-            'UAS' => $this->tugas()->whereIn('tugas_id',$tugas)->where('tipe',2)->get(['pertemuan_id','nilai','tugas_id'])->makeHidden('pivot')->first(),
+            $this->tugas()->whereIn('tugas_id',$tugas)->where('tipe',0)->get(['nilai','tugas_id'])->makeHidden('pivot'),
+            'UTS' => $this->tugas()->whereIn('tugas_id',$tugas)->where('tipe',1)->get(['nilai','tugas_id'])->makeHidden('pivot')->first(),
+            'UAS' => $this->tugas()->whereIn('tugas_id',$tugas)->where('tipe',2)->get(['nilai','tugas_id'])->makeHidden('pivot')->first(),
         ];
     }
 }

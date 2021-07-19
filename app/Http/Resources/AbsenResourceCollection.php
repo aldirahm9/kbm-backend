@@ -32,7 +32,7 @@ class AbsenResourceCollection extends ResourceCollection
     {
         return [
             'meta' => [
-                'pertemuan' => Pertemuan::where('kelas_id',$this->kelas)->count()
+                'jumlah_pertemuan' => Pertemuan::where('kelas_id',$this->kelas)->count()
             ]
         ];
     }

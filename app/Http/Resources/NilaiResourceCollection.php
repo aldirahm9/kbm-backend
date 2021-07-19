@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Kelas;
+use App\Tugas;
 use App\User;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -31,7 +32,7 @@ class NilaiResourceCollection extends ResourceCollection
     {
         return [
             'meta' => [
-                'tugas_id' => Kelas::find($this->kelas)->tugas->where('tipe',0)->pluck('id')
+                'tugas_id' => Tugas::where('kelas_id',$this->kelas)->pluck('id')
             ]
         ];
     }

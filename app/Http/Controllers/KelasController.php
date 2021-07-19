@@ -48,6 +48,15 @@ class KelasController extends Controller
     }
 
 
+    public function uploadRPS($id, Request $request)
+    {
+        # code...
+    }
+
+    public function downloadRPS($id, Request $request)
+    {
+        
+    }
 
 
 

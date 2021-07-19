@@ -69,7 +69,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany('App\Pertemuan','absen')
                     ->using('App\Absen')
-                    ->withPivot('valid')
+                    ->withPivot(['valid','id'])
                     ->withTimestamps();
     }
 

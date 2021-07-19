@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Absen extends Pivot
 {
-    protected $table = 'users';
+    protected $table = 'absen';
 
     /**
      * The attributes that are mass assignable.
@@ -14,7 +14,12 @@ class Absen extends Pivot
      * @var array
      */
     protected $fillable = [
-        'pertemuan_id', 'uesr_id', 'valid'
+        'pertemuan_id', 'user_id', 'valid','created_at','id'
     ];
+
+    public function pertemuan()
+    {
+        return $this->belongsTo('App\Pertemuan');
+    }
 
 }

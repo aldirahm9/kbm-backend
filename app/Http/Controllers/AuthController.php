@@ -30,7 +30,7 @@ class AuthController extends Controller
         $username = $request->username;
         $password = $request->password;
         $resp = json_decode(SiakadUtils::login($username,$password));
-        if ($resp == null) {
+        if ($resp == null || $resp->status == false) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 

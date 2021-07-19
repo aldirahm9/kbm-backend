@@ -32,7 +32,7 @@ class Pertemuan extends Model
     {
         return $this->belongsToMany('App\User','absen')
                     ->using('App\Absen')
-                    ->withPivot(['valid'])
+                    ->withPivot(['valid','id'])
                     ->withTimestamps();
     }
 
