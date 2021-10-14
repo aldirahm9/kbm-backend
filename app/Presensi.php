@@ -2,11 +2,12 @@
 
 namespace App;
 
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Absen extends Pivot
+class Presensi extends Pivot
 {
-    protected $table = 'absen';
+    protected $table = 'presensi';
 
     /**
      * The attributes that are mass assignable.
@@ -16,6 +17,11 @@ class Absen extends Pivot
     protected $fillable = [
         'pertemuan_id', 'user_id', 'valid','created_at','id'
     ];
+
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 
     public function pertemuan()
     {

@@ -17,9 +17,11 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('username')->unique();
             $table->string('nama');
-            $table->tinyInteger('dosen')->default(0);
+            $table->tinyInteger('role')->default(1); // 1 mahasiswa, 2 dosen, 3 tpjm, 4 admin
             $table->string('password');
-            $table->string('token_siakad');
+            $table->unsignedBigInteger('prodi_id')->nullable();
+            $table->foreign('prodi_id')->references('id')->on('program_studi')->onDelete('set null');
+            $table->string('token_siakad')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

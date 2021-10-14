@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Semester;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ValidasiAbsenResourceCollection extends ResourceCollection
+class KelasTpjmResourceCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -15,5 +16,14 @@ class ValidasiAbsenResourceCollection extends ResourceCollection
     public function toArray($request)
     {
         return parent::toArray($request);
+    }
+
+    public function with($request)
+    {
+        return [
+            "meta" => [
+                "semester" => Semester::orderBy('semester')->get()
+            ]
+        ];
     }
 }

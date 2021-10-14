@@ -4,19 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RpsKelas extends Migration
+class Semester extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up() 
     {
-        Schema::create('rps_kelas', function (Blueprint $table) {
+        Schema::create('semester', function (Blueprint $table) {
             $table->id();
-            $table->string('kelas_id');
-            $table->string('filename');
+            $table->string('semester');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class RpsKelas extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rps_kelas');
+        Schema::dropIfExists('semester');
     }
 }

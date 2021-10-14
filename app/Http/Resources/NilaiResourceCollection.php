@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Kelas;
+use App\KelasMahasiswa;
 use App\Tugas;
 use App\User;
 use Illuminate\Http\Resources\Json\ResourceCollection;

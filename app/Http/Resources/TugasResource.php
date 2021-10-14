@@ -23,12 +23,13 @@ class TugasResource extends JsonResource
                 'created_at' => \Carbon\Carbon::parse($this->created_at)->translatedFormat('l, d/m/Y'),
             ];
         } else {
+            $tugas = $this->mahasiswa->where('id',auth()->user()->id)->first();
             return [
                 'id' => $this->id,
                 'nama' => $this->nama,
                 'tipe' => $this->tipe,
                 'bobot' => $this->bobot,
-                'nilai' => $this->mahasiswa->where('user_id',auth()->user()->id)->first(),
+                'nilai' => $tugas ? $this->mahasiswa->where('id',auth()->user()->id)->first()->pivot->nilai : null,
                 'created_at' => \Carbon\Carbon::parse($this->created_at)->translatedFormat('l, d/m/Y'),
             ];
         }

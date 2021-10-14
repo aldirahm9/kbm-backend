@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ValidasiAbsenResource extends JsonResource
+class ValidasiPresensiResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,7 +19,7 @@ class ValidasiAbsenResource extends JsonResource
             'mahasiswa_id' => $this->id,
             'nama' => $this->nama,
             'nomor_induk' => $this->username,
-            'waktu' => \Carbon\Carbon::parse($this->pivot->created_at)->translatedFormat('H:m:s'),
+            'waktu' => $this->pivot->created_at != null ? \Carbon\Carbon::parse($this->pivot->created_at)->translatedFormat('H:i:s') : '',
         ];
     }
 }

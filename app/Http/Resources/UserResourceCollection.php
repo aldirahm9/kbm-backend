@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Semester;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class KelasResourceCollection extends ResourceCollection
+class UserResourceCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -16,14 +15,5 @@ class KelasResourceCollection extends ResourceCollection
     public function toArray($request)
     {
         return parent::toArray($request);
-    }
-
-    public function with($request)
-    {
-        return [
-            "meta" => [
-                "semester" => Semester::orderBy('semester')->get()
-            ]
-        ];
     }
 }

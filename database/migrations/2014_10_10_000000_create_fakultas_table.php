@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RpsKelas extends Migration
+class CreateFakultasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class RpsKelas extends Migration
      */
     public function up()
     {
-        Schema::create('rps_kelas', function (Blueprint $table) {
+        Schema::create('fakultas', function (Blueprint $table) {
             $table->id();
-            $table->string('kelas_id');
-            $table->string('filename');
+            $table->string('nama');
+            $table->string('kode');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class RpsKelas extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rps_kelas');
+        Schema::dropIfExists('fakultas');
     }
 }

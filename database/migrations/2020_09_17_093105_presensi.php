@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Absen extends Migration
+class Presensi extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class Absen extends Migration
      */
     public function up()
     {
-        Schema::create('absen', function (Blueprint $table) {
+        Schema::create('presensi', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pertemuan_id');
             $table->foreign('pertemuan_id')->references('id')->on('pertemuan')->onDelete('cascade');
@@ -31,6 +31,6 @@ class Absen extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('absen');
+        Schema::dropIfExists('presensi');
     }
 }

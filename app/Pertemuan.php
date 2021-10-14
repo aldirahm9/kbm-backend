@@ -2,6 +2,7 @@
 
 namespace App;
 
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Pertemuan extends Model
@@ -10,8 +11,13 @@ class Pertemuan extends Model
     protected $table = 'pertemuan';
 
     protected $fillable = [
-        'id','pertemuan', 'materi', 'valid_dosen', 'valid_mahasiswa','kelas_id','open'
+        'id','pertemuan', 'materi', 'valid_dosen', 'valid_mahasiswa','kelas_id','open','penanggung_jawab_sementara'
     ];
+
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 
     public function valid_dosen()
     {
@@ -30,10 +36,12 @@ class Pertemuan extends Model
 
     public function mahasiswa()
     {
-        return $this->belongsToMany('App\User','absen')
-                    ->using('App\Absen')
+        return $this->belongsToMany('App\User','presensi')
+                    ->using('App\Presensi')
                     ->withPivot(['valid','id'])
                     ->withTimestamps();
     }
+
+
 
 }

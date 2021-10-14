@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use App\Semester;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class KelasResourceCollection extends ResourceCollection
+class KelasDosenResourceCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.

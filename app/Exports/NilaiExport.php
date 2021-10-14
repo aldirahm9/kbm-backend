@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Kelas;
+use App\KelasMahasiswa;
 use App\Tugas;
 use App\User;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -23,7 +23,7 @@ class NilaiExport extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder imple
 
     public function view(): View
     {
-        $usersid = Kelas::where('kelas_id',$this->kelas_id)->get()->pluck('user_id');
+        $usersid = KelasMahasiswa::where('kelas_id',$this->kelas_id)->get()->pluck('user_id');
         $users = User::find($usersid);
         $tugas = Tugas::where('kelas_id',$this->kelas_id)->where('tipe',0)->get();
         return view('exports.nilai', [

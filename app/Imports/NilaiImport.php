@@ -2,23 +2,37 @@
 
 namespace App\Imports;
 
+use App\ApiUtils\SiakadUtils;
+use App\KelasMahasiswa;
 use App\Tugas;
 use App\User;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class NilaiImport implements ToCollection
 {
-    public function __construct($id)
+
+    private $errors;
+
+    public function __construct($id,$semester)
     {
         $this->kelas_id = $id;
+        $this->semester = $semester;
+    }
+
+    public function getHasil() {
+        return $this->errors;
     }
     /**
     * @param Collection $collection
     */
     public function collection(Collection $rows)
     {
+        $kelas_info = SiakadUtils::getKelasInfo($this->kelas_id,$this->semester,auth()->user()->token_siakad);
+        $sks = $kelas_info->identitas->sks;
+        $this->errors = [];
         foreach ($rows as $key=>$row)
         {
             if($key < 2) continue;
@@ -43,10 +57,26 @@ class NilaiImport implements ToCollection
 
             $uas_id = Tugas::where('kelas_id',$this->kelas_id)->where('tipe',2)->pluck('id')->first();
             if($uas_id && $row[count($row)-3] !== null) {
-                $nilai[$uas_id] = ['nilai' => $row[count($row)-3]];
+                //cek dulu presensi mhsnya cukup atau engga
+                $jumlah_hadir = $user->pertemuan->where('kelas_id',$this->kelas_id)->where('valid',1)->count();
+                if($sks == 3 && $jumlah_hadir >= 13) {
+                    $nilai[$uas_id] = ['nilai' => $row[count($row)-3]];
+                }
+                else {
+                    //gaboleh ikut uas
+                    array_push($this->errors,'Jumlah hadir mahasiswa ' . $user->username . ' tidak mencukupi untuk mengikuti UAS');
+                }
             }
 
             $user->tugas()->syncWithoutDetaching($nilai);
+            $nilai_akhir = 0;
+
+            foreach($user->tugas->whereIn('id',$tugas_ids) as $nilai_mhs) {
+                $nilai_akhir = $nilai_akhir + ($nilai_mhs->pivot->nilai * $nilai_mhs->bobot / 100);
+            }
+            $kelas = KelasMahasiswa::where('kelas_id',$this->kelas_id)->where('user_id',$user->id)->first();
+            $kelas->nilai = $nilai_akhir;
+            $kelas->save();
         }
     }
 
