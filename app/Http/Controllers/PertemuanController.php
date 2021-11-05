@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Absen;
-use App\Http\Resources\AbsenResourceCollection;
+use App\Presensi;
+use App\Http\Resources\PresensiResourceCollection;
 use App\Http\Resources\PertemuanResource;
 use App\Http\Resources\PertemuanResourceCollection;
-use App\Http\Resources\ValidasiAbsenResourceCollection;
-use App\Kelas;
+use App\Http\Resources\ValidasiPresensiResourceCollection;
+use App\KelasMahasiswa;
 use App\Pertemuan;
 use App\User;
 use Illuminate\Http\Request;
@@ -87,30 +87,39 @@ class PertemuanController extends Controller
     public function getUnvalidatedPresensi($id) {
         $pertemuan = Pertemuan::find($id);
         $user = $pertemuan->mahasiswa->where('pivot.valid',0);
-        return new ValidasiAbsenResourceCollection($user);
+        return new ValidasiPresensiResourceCollection($user);
     }
 
     public function validPresensi(Request $request) {
         //if dosen || pj
-        $absen = Absen::findMany($request);
-        foreach($absen as $each) {
+        $presensi = Presensi::findMany($request);
+        foreach($presensi as $each) {
             $each->valid = true;
             $each->save();
-            $each->pertemuan->jumlah_mahasiswa++;
-            $each->pertemuan->save();
         }
+        $pertemuan = Pertemuan::find($presensi->first()->pertemuan->id);
+        $pertemuan->jumlah_mahasiswa = $pertemuan->mahasiswa->where('pivot.valid',1)->count();
+        $pertemuan->save();
         return response()->json(['message' => 'Success'],200);
     }
 
-    public function getForm06($id) {
-        $list_user = Kelas::where('kelas_id',$id)->pluck('user_id');
+    public function getForm06($semester,$id) {
+        $list_user = KelasMahasiswa::where('kelas_id',$id)->where('semester',$semester)->pluck('user_id');
         $user = User::find($list_user);
-        return (new AbsenResourceCollection($user))->kelas($id);
+        return (new PresensiResourceCollection($user))->kelas($id);
     }
 
-    public function tutupAbsen($id) {
+    public function tutupPresensi($id) {
         $pertemuan = Pertemuan::find($id);
         $pertemuan->open = 0;
+        $pertemuan->save();
+        return response()->json(['message' => 'Success'],200);
+    }
+
+    public function assignPenanggungJawabSementara($pertemuan,Request $request) {
+
+        $pertemuan = Pertemuan::find($pertemuan);
+        $pertemuan->penanggung_jawab_sementara = $request->mahasiswa;
         $pertemuan->save();
         return response()->json(['message' => 'Success'],200);
     }

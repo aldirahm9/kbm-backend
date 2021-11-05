@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class KelasUser extends Migration
+class KelasDosen extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class KelasUser extends Migration
      */
     public function up()
     {
-        Schema::create('kelas_mahasiswa', function (Blueprint $table) {
+        Schema::create('kelas_dosen', function (Blueprint $table) {
             $table->id();
 
             $table->string('kelas_id');
@@ -21,9 +21,8 @@ class KelasUser extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->integer('nilai')->nullable();
             $table->string('semester');
-            $table->boolean('penanggung_jawab')->default(0);
+
             $table->timestamps();
         });
     }
@@ -35,6 +34,6 @@ class KelasUser extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kelas_mahasiswa');
+        Schema::dropIfExists('kelas_dosen');
     }
 }
