@@ -10,7 +10,7 @@ class Tugas extends Model
     protected $table = 'tugas';
 
     protected $fillable = [
-        'nama', 'tipe', 'bobot'
+        'nama', 'tipe', 'bobot','kelas_id'
     ];
 
     public function mahasiswa()

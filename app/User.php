@@ -19,7 +19,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'username', 'nama', 'dosen', 'password', 'token_siakad'
+        'username', 'nama', 'role', 'password', 'token_siakad', 'prodi_id'
     ];
 
     /**
@@ -62,14 +62,17 @@ class User extends Authenticatable implements JWTSubject
 
     public function kelas()
     {
-        return $this->hasMany('App\Kelas');
+        if($this->isDosen())
+        return $this->hasMany('App\KelasDosen');
+        else
+        return $this->hasMany('App\KelasMahasiswa');
     }
 
     public function pertemuan()
     {
-        return $this->belongsToMany('App\Pertemuan','absen')
-                    ->using('App\Absen')
-                    ->withPivot('valid')
+        return $this->belongsToMany('App\Pertemuan','presensi')
+                    ->using('App\Presensi')
+                    ->withPivot(['valid','id'])
                     ->withTimestamps();
     }
 
@@ -80,8 +83,31 @@ class User extends Authenticatable implements JWTSubject
                     ->withTimestamps();
     }
 
+    public function prodi()
+    {
+        return $this->belongsTo('App\ProgramStudi');
+    }
+
+    public function isMahasiswa()
+    {
+        return $this->role == 1;
+    }
+
     public function isDosen()
     {
-        return $this->dosen == 1;
+        return $this->role >= 2;
     }
+
+    public function isTpjm()
+    {
+        return $this->role == 3;
+    }
+
+    public function isAdmin()
+    {
+        return $this->role == 0;
+    }
+
+
+
 }

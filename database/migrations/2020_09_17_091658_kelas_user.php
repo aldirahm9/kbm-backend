@@ -22,6 +22,7 @@ class KelasUser extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->integer('nilai')->nullable();
+            $table->string('semester');
             $table->boolean('penanggung_jawab')->default(0);
             $table->timestamps();
         });

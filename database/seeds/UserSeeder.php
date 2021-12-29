@@ -1,6 +1,6 @@
 <?php
 
-use App\Kelas;
+use App\KelasMahasiswa;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -12,46 +12,72 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $dosen = App\User::create([
-            'nama' => 'dosen',
-            'email' => 'dosen@unj.com',
-            'password' => bcrypt('123123'),
-            'nomor_induk' => '123',
-            'dosen' => 1
+        $d = App\User::create([
+            'username' => '0015067705',
+            'nama' => 'Med Irzal',
+            'role' => 3,
+            'password' => bcrypt('dosen'),
+            'token_siakad' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjMxNDUxNjEzMjQiLCJwYXNzd29yZCI6Ijk2YWxkaTk5In0.OMOH-dUhJLFma6XpQzPSgRnU_KAOGmV2hQL-ljl5LDY',
+            'prodi_id' => 1
         ]);
 
-        $mahasiswa = App\User::create([
-            'nama' => 'aldi',
-            'email' => 'aldi@unj.com',
-            'password' => bcrypt('123123'),
-            'nomor_induk' => '3145161324'
+       $p = App\User::create([
+           'username' => '3145160515',
+           'nama' => 'Puti Andini',
+           'role' => 1,
+           'prodi_id' => 1,
+           'password' => bcrypt('123'),
+       ]);
+       KelasMahasiswa::create([
+        'kelas_id' => '3903',
+        'user_id' => $p->id,
+        'semester' => '110'
         ]);
 
-        App\User::create([
-            'nama' => 'mahasiswa',
-            'email' => 'mahasiswa@unj.com',
-            'password' => bcrypt('123123'),
-            'nomor_induk' => '125223'
+        $p = App\User::create([
+            'username' => '3145161574',
+            'nama' => 'Dwi Solihatun',
+            'role' => 1,
+            'prodi_id' => 1,
+            'password' => bcrypt('123'),
         ]);
+        KelasMahasiswa::create([
+         'kelas_id' => '3903',
+         'user_id' => $p->id,
+         'semester' => '110'
+         ]);
 
-        $mata_kuliah = App\MataKuliah::create([
-            'nama' => 'Pengantar Kecerdasan Buatan',
-            'sks' => 3,
-            'kode' => '123456'
+         $p = App\User::create([
+            'username' => '3145160864',
+            'nama' => 'Ardie Perdana',
+            'role' => 1,
+            'prodi_id' => 1,
+            'password' => bcrypt('123'),
         ]);
+        KelasMahasiswa::create([
+         'kelas_id' => '3903',
+         'user_id' => $p->id,
+         'semester' => '110'
+         ]);
 
-        App\MataKuliah::create([
-            'nama' => 'OSK',
-            'sks' => 3,
-            'kode' => '1234562'
+         $p = App\User::create([
+            'username' => '3145161387',
+            'nama' => 'Zulfa Aginka',
+            'role' => 1,
+            'prodi_id' => 1,
+            'password' => bcrypt('123'),
         ]);
+        KelasMahasiswa::create([
+         'kelas_id' => '3903',
+         'user_id' => $p->id,
+         'semester' => '110'
+         ]);
 
-        $kelas = Kelas::create([
-            'mata_kuliah_id' => $mata_kuliah->id
-        ]);
-
-        $mahasiswa->kelas()->attach($kelas->id);
-        $dosen->kelas()->attach($kelas->id);
-
+         App\User::create([
+             'username' => "123",
+             'nama' => 'Admin',
+             'role' => 4,
+             'password' => bcrypt('123')
+         ]);
     }
 }

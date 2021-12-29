@@ -2,11 +2,11 @@
 
 namespace App\Http\Resources;
 
-use App\Kelas;
+use App\KelasMahasiswa;
 use App\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AbsenResource extends JsonResource
+class PresensiResource extends JsonResource
 {
 
     protected $kelas;
@@ -33,7 +33,7 @@ class AbsenResource extends JsonResource
             'nama' => $this->nama,
             'nomor_induk' => $this->username,
             'pertemuan' =>
-                $this->pertemuan()->where('kelas_id',$this->kelas)->get(['pertemuan','pertemuan_id','valid'])->sortBy('pertemuan')->makeHidden('pivot'),
+                $this->pertemuan()->where('kelas_id',$this->kelas)->get(['pertemuan','pertemuan_id','valid','presensi.created_at'])->sortBy('pertemuan')->makeHidden('pivot'),
         ];
     }
 

@@ -17,8 +17,8 @@ class Pertemuan extends Migration
             $table->id();
             $table->integer('pertemuan');
             $table->string('kelas_id');
-
-            $table->string('materi');
+            $table->string('penanggung_jawab_sementara')->nullable(); //nrm mahasiswanya
+            $table->string('materi')->nullable();
             $table->tinyInteger('valid_dosen');
             $table->tinyInteger('valid_mahasiswa');
             $table->tinyInteger('open')->default(0);

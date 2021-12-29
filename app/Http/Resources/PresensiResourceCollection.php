@@ -2,11 +2,11 @@
 
 namespace App\Http\Resources;
 
-use App\Kelas;
+use App\KelasMahasiswa;
 use App\Pertemuan;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class AbsenResourceCollection extends ResourceCollection
+class PresensiResourceCollection extends ResourceCollection
 {
     protected $kelas;
 
@@ -32,7 +32,8 @@ class AbsenResourceCollection extends ResourceCollection
     {
         return [
             'meta' => [
-                'pertemuan' => Pertemuan::where('kelas_id',$this->kelas)->count()
+                'jumlah_pertemuan' => Pertemuan::where('kelas_id',$this->kelas)->count(),
+                'pertemuan_terakhir' => Pertemuan::where('kelas_id',$this->kelas)->get()->last()->created_at->format('d/m/Y H:i')
             ]
         ];
     }

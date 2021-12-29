@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Resources\AbsenResource;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\KelasController;
+use App\Http\Resources\PresensiResource;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
 Route::group(['middleware' => 'api','prefix'=> 'auth'], function () {
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
@@ -30,21 +33,58 @@ Route::group(['middleware' => 'api','prefix'=> 'auth'], function () {
 });
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::get('kelas', 'KelasController@getAllKelas');
-    Route::get('kelas/{id}', 'KelasController@getKelas');
+    Route::get('semester-aktif','HomeController@getSemesterAktif');
+
     Route::get('kelas/{id}/form-05', 'PertemuanController@getForm05');
-    Route::post('kelas/{id}/form-05/add', 'PertemuanController@buatPertemuan');
+    Route::post('kelas/{id}/form-05', 'PertemuanController@buatPertemuan');
+
+    Route::post('kelas/{id}/rps', 'KelasController@uploadRPS');
+    Route::get('kelas/{id}/rps', 'KelasController@downloadRPS');
+
+    Route::get('kelas/{id}/tugas', 'TugasController@getTugas');
+    Route::post('kelas/{id}/tugas', 'TugasController@buatTugas');
+
+    Route::get('kelas/{semester}', 'KelasController@getAllKelas');
+    Route::get('kelas/{semester}/{id}', 'KelasController@getKelas');
+    Route::post('kelas/{semester}/{id}/penanggung-jawab/', 'KelasController@assignPJ');
+    Route::get('kelas/{semester}/{id}/mahasiswa/', 'KelasController@getMahasiswaList');
+
+    Route::get('kelas/{semester}/{id}/form-06', 'PertemuanController@getForm06');
+    Route::get('kelas/{semester}/{id}/nilai', 'TugasController@getForm06Nilai');
+
+    Route::get('kelas/{semester}/{id}/nilai/excel', 'TugasController@exportExcel');
+    Route::post('kelas/{semester}/{id}/nilai/excel', 'TugasController@importExcel');
+
+
+
     Route::post('form-05/{id}/valid', 'pertemuanController@validPertemuan');
     Route::post('form-05/{id}/hadir', 'pertemuanController@hadirPertemuan');
-    Route::post('form-05/{id}/buka-absen', 'PertemuanController@bukaAbsen');
+    Route::post('form-05/{id}/tutup-presensi', 'PertemuanController@tutupPresensi');
+    Route::put('form-05/{id}', 'PertemuanController@ubahPertemuan');
+    Route::delete('form-05/{id}', 'PertemuanController@hapusPertemuan');
+    Route::get('form-05/{id}/unvalid', 'PertemuanController@getUnvalidatedPresensi');
+    Route::post('form-05/{id}/penanggung-jawab-sementara/', 'PertemuanController@assignPenanggungJawabSementara');
 
-    Route::post('absen/{id}/valid', 'PertemuanController@validPresensi');
+    Route::post('presensi/valid', 'PertemuanController@validPresensi');
 
-    Route::get('kelas/{id}/form-06', 'PertemuanController@getForm06');
-    Route::post('kelas/{id}/form-06-nilai', 'NilaiController@getForm06Nilai');
 
-    Route::get('kelas/{id}/tugas', 'NilaiController@getTugas');
+    Route::get('dosen', 'AdminController@getDosen');
+    Route::post('dosen/{username}/switch-role', 'AdminController@switchRole');
+
+
+    Route::delete('tugas/{id}', 'TugasController@hapusTugas');
+    Route::put('tugas/{id}', 'TugasController@ubahTugas');
+    Route::put('tugas', 'TugasController@editTugasArray');
+
+
+
+    Route::get('monitoring/kelas/{semester}', 'KelasController@getAllKelasInProdi');
+
+    Route::get('rekap-presensi/{semester}', 'KelasController@rekapPresensi');
+
+
 
 });
+
 
 
