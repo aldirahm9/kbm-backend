@@ -22,7 +22,9 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-
+Route::get('/test', function () {
+    return response()->json(['message' => 'Test']);
+});
 
 
 Route::group(['middleware' => 'api','prefix'=> 'auth'], function () {
