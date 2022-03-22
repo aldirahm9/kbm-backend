@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'nama' => 'Med Irzal',
             'role' => 3,
             'password' => bcrypt('dosen'),
-            'token_siakad' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjMxNDUxNjEzMjQiLCJwYXNzd29yZCI6Ijk2YWxkaTk5In0.OMOH-dUhJLFma6XpQzPSgRnU_KAOGmV2hQL-ljl5LDY',
+            'token_siakad' => '',
             'prodi_id' => 1
         ]);
 
